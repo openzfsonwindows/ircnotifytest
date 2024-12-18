@@ -3,7 +3,7 @@ name: "Notify IRC on Push to Development"
 on:
   push:
     branches:
-      - development
+      - main
 
 jobs:
   notify:
