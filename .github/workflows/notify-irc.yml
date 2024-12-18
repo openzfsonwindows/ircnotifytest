@@ -19,5 +19,5 @@ jobs:
           message: |
             [openzfs] ${{ github.actor }} pushed ${{ github.event.commits && github.event.commits.size || 0 }} commit${{ github.event.commits && github.event.commits.size > 1 && 's' || '' }} to ${{ github.ref_name }}
             ${{ github.event.compare }}
-            ${{ join(github.event.commits.*.message, '\n') }}
+            ${{ join(github.event.commits.*.message.split('\n')[0], '\n') }}
 
