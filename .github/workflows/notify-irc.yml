@@ -1,0 +1,23 @@
+name: "Notify IRC on Push to Development"
+
+on:
+  push:
+    branches:
+      - development
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Notify IRC
+        uses: rectalogic/notify-irc@v1
+        with:
+          channel: "#OpenZFS-Windows"
+          server: "irc.libera.chat"
+          nickname: zfs-consus
+          message: |
+            [openzfs] ${{ github.actor }} pushed ${{ github.event.commits.length }} commit${{ github.event.commits.length != 1 && 's' || '' }} to development
+            ${{ github.event.compare }}
+            ${{ join(github.event.commits.*.message, '\n') }}
+
+
