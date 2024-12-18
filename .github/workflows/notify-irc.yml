@@ -17,8 +17,8 @@ jobs:
           server: "irc.libera.chat"
           nickname: zfs-consus
           message: |
-            [openzfs] ${{ github.actor }} pushed ${{ github.event.commits && format('{0}', github.event.commits | length) || '0' }} commit${{ github.event.commits && github.event.commits | length > 1 && 's' || '' }} to ${{ github.ref_name }}
+            [openzfs] ${{ github.actor }} pushed ${{ github.event.commits && github.event.commits | length || '0' }} commit${{ github.event.commits && github.event.commits.length > 1 && 's' || '' }} to ${{ github.ref_name }}
             ${{ github.event.compare }}
-            ${{ github.event.commits && join(github.event.commits.*.message, '\n') || '' }}
-            ${{ github.event.commits && github.event.commits | length > 8 && '...and more!' || '' }}
+            ${{ format('{0}', github.event.commits[0].message) }}...
+            ${{ github.event.commits.length > 8 && '...and more!' || '' }}
 
