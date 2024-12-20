@@ -20,11 +20,12 @@ jobs:
         run: |
               .github/workflows/notify-irc.sh "$COMMITS_JSON" "$GITHUB_ACTOR" "$GITHUB_REF_NAME" "$GITHUB_COMPARE_URL"
 
-      - name: Decode Message for IRC Notify
-        id: decode-message
+      - name: Encode Message as JSON
+        id: encode-message
         run: |
-              ENCODED_MESSAGE="VGVzdCBsaW5lIG9uZQpUZXN0IGxpbmUgdHdvCg=="
-              echo "message=$ENCODED_MESSAGE" >> $GITHUB_OUTPUT
+          MULTILINE_MESSAGE="Testing line one\nTest line two"
+          ENCODED_MESSAGE=$(echo "$MULTILINE_MESSAGE" | jq -R .)
+          echo "message=$ENCODED_MESSAGE" >> $GITHUB_OUTPUT
 
       - name: Notify IRC
         uses: rectalogic/notify-irc@v1
@@ -32,4 +33,6 @@ jobs:
           channel: "#OpenZFS-Windows"
           server: "irc.libera.chat"
           nickname: "zfs-consus"
-          message: ${{ steps.encode-message.outputs.message }} | base64 --decode 
+          message: ${{ fromJSON(steps.encode-message.outputs.message) }}
+
+
