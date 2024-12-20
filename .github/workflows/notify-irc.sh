@@ -2,6 +2,11 @@
 # notify.sh
 # This script formats the IRC notification message.
 
+echo "COMMITS_JSON: $1"
+echo "GITHUB_ACTOR: $2"
+echo "GITHUB_REF_NAME: $3"
+echo "GITHUB_COMPARE_URL: $4"
+
 # Extract input from environment variables (set by GitHub Actions)
 COMMITS_JSON="$1"
 ACTOR="$2"
