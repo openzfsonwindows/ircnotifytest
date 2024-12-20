@@ -1,26 +1,19 @@
-name: Notify IRC
+
+name: Notify IRC on Push
 
 on:
   push:
-    branches:
-      - main  # Or your desired branch
 
 jobs:
-  notify-irc:
+  notify:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Set execute permissions
-        run: chmod +x .github/workflows/notify-irc.sh
-
       - name: Notify IRC
-        uses: rectalogic/notify-irc@v1
+        uses: openzfsonwindows/notify-irc@master
         with:
           channel: "#OpenZFS-Windows"
           server: "irc.libera.chat"
           nickname: "zfs-consus"
-          message: "${{ github.repository }}#${{ github.run_id }} (${{ github.ref }} - ${{ github.sha }} ${{ github.actor }}): ${{ job.status }} - https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-
+          eventpath: ${{ github.event_path }}
 
