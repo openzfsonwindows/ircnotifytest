@@ -29,8 +29,9 @@ jobs:
 
       - name: Notify IRC
         uses: rectalogic/notify-irc@v1
+        channel: "#OpenZFS-Windows"
+        server: "irc.libera.chat"
+        nickname: "zfs-consus"
         with:
-          channel: "#OpenZFS-Windows"
-          server: "irc.libera.chat"
-          nickname: "zfs-consus"
-          message: "${{ env.decoded_message }}"
+          message: |
+            ${{ steps.encode-message.outputs.message }} | base64 --decode | xargs
