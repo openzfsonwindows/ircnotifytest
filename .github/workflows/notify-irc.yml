@@ -3,6 +3,7 @@ name: Notify IRC on Push
 
 on:
   push:
+  issues:
 
 jobs:
   notify:
