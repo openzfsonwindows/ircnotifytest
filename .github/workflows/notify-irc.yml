@@ -10,14 +10,21 @@ jobs:
   notify:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install jq
+        run: sudo apt-get install -y jq
+
       - name: Notify IRC
-        uses: rectalogic/notify-irc@v1
-        with:
-          channel: "#OpenZFS-Windows"
-          server: "irc.libera.chat"
-          nickname: zfs-consus
-          message: |
-            [openzfs] ${{ github.actor }} pushed ${{ github.event.commits && github.event.commits.size || 0 }} commit${{ github.event.commits && github.event.commits.size > 1 && 's' || '' }} to ${{ github.ref_name }}
-            ${{ github.event.compare }}
-            ${{ join(github.event.commits.*.message.split('\n')[0], '\n') }}
+        env:
+          COMMITS_JSON: ${{ toJson(github.event.commits) }}
+          ACTOR: ${{ github.actor }}
+          BRANCH: ${{ github.ref_name }}
+          COMPARE_URL: ${{ github.event.compare }}
+        run: |
+          .github/workflows/notify-irc.sh "$COMMITS_JSON" "$ACTOR" "$BRANCH" "$COMPARE_URL" | notify-irc \
+            --channel "#OpenZFS-Windows" \
+            --server "irc.libera.chat" \
+            --nickname zfs-consus
 
