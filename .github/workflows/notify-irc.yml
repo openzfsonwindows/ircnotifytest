@@ -18,7 +18,8 @@ jobs:
       - name: Generate notification message
         id: notify
         run: |
-          .github/workflows/notify-irc.sh "$COMMITS_JSON" "$GITHUB_ACTOR" "$GITHUB_REF_NAME" "$GITHUB_COMPARE_URL" > notification.txt
+          MESSAGE=$(.github/workflows/notify-irc.sh "$COMMITS_JSON" "$GITHUB_ACTOR" "$GITHUB_REF_NAME" "$GITHUB_COMPARE_URL")
+          echo "::set-output name=message::$MESSAGE"
 
       - name: Notify IRC
         uses: rectalogic/notify-irc@v1
@@ -26,5 +27,5 @@ jobs:
           channel: "#OpenZFS-Windows"
           server: "irc.libera.chat"
           nickname: "zfs-consus"
-          message: $(cat notification.txt)
+          message: "${{ steps.notify.outputs.message }}"
 
