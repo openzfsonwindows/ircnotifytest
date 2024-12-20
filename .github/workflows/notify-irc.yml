@@ -9,7 +9,8 @@ on:
       - edited
       - closed
   issue_comment:
-      
+  pull_request:
+
 jobs:
   notify-irc:
     runs-on: ubuntu-latest
