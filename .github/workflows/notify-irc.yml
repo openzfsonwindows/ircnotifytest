@@ -19,6 +19,7 @@ jobs:
         id: notify
         run: |
           ENCODED_MESSAGE="$(.github/workflows/notify-irc.sh | jq -R .)"
+          echo "Encoded is $ENCODED_MESSAGE"
           echo "message=$ENCODED_MESSAGE" >> $GITHUB_OUTPUT
 
       - name: Notify IRC
