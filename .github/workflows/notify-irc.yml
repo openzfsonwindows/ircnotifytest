@@ -8,6 +8,7 @@ on:
       - opened
       - edited
       - closed
+  issue_comment:
       
 jobs:
   notify-irc:
