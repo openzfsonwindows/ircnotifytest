@@ -24,8 +24,7 @@ jobs:
         id: decode-message
         run: |
               ENCODED_MESSAGE="VGVzdCBsaW5lIG9uZQpUZXN0IGxpbmUgdHdvCg=="
-              DECODED_MESSAGE=$(echo "$ENCODED_MESSAGE" | base64 --decode)
-              echo "decoded_message=$DECODED_MESSAGE" >> $GITHUB_ENV
+              echo "message=$ENCODED_MESSAGE" >> $GITHUB_OUTPUT
 
       - name: Notify IRC
         uses: rectalogic/notify-irc@v1
