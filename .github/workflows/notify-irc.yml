@@ -15,7 +15,6 @@ jobs:
           channel: "#OpenZFS-Windows"
           server: "irc.libera.chat"
           nickname: "zfs-consus"
-	  verbose: true
-	  ansicolor: true
+	  verbose:
           eventpath: ${{ github.event_path }}
 
