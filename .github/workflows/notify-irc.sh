@@ -18,6 +18,7 @@ COMMIT_TITLES=$(echo "$COMMITS_JSON" | jq -r '.[0:8][] | "\(.id[0:7]) - \(.messa
 
 # Count the commits
 COMMIT_COUNT=$(echo "$COMMITS_JSON" | jq -r 'length')
+COMMIT_COUNT=${COMMIT_COUNT:-0}  # Default to 0 if jq fails
 
 # Format the message
 if [ "$COMMIT_COUNT" -eq 1 ]; then
