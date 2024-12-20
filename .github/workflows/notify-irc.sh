@@ -1,5 +1,8 @@
 #!/bin/bash
 
+echo "Dumping ENV"
+env
+
 COMMITS_JSON="${1:-""}"
 ACTOR="${2:-unknown}"
 BRANCH="${3:-unknown}"
