@@ -3,10 +3,13 @@
 echo "Dumping ENV"
 env
 
-COMMITS_JSON="${1:-""}"
-ACTOR="${2:-unknown}"
-BRANCH="${3:-unknown}"
-COMPARE_URL="${4:-unknown}"
+EVENT_PATH="${GITHUB_EVENT_PATH}"
+
+# Read the commits data from the GITHUB_EVENT_PATH JSON file
+COMMITS_JSON=$(jq -r '.commits' "$EVENT_PATH")
+ACTOR="${GITHUB_ACTOR:-unknown}"
+BRANCH="${GITHUB_REF_NAME:-unknown}"
+COMPARE_URL="${GITHUB_COMPARE_URL:-unknown}"
 
 commit_count=$(echo "$COMMITS_JSON" | jq 'length')
 commit_count=${commit_count:-0}
