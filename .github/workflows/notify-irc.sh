@@ -11,7 +11,7 @@ COMPARE_URL="${GITHUB_COMPARE_URL:-unknown}"
 commit_count=$(echo "$COMMITS_JSON" | jq 'length')
 commit_count=${commit_count:-0}
 
-printf 'message=Testing line one\nTest line two' >> $GITHUB_OUTPUT
+printf 'message=Testing line one\rTest line two' >> $GITHUB_OUTPUT
 exit 0
 
 
