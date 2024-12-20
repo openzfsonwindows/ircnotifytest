@@ -28,6 +28,6 @@ jobs:
           channel: "#OpenZFS-Windows"
           server: "irc.libera.chat"
           nickname: "zfs-consus"
-          message: ${{ fromJSON(steps.encode-message.outputs.message) }}
+          message: "${{ github.repository }}#${{ github.run_id }} (${{ github.ref }} - ${{ github.sha }} ${{ github.actor }}): ${{ job.status }} - https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
 
 
