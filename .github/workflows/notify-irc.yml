@@ -18,7 +18,8 @@ jobs:
       - name: Generate notification message
         id: notify
         run: |
-          echo "message=$(.github/workflows/notify-irc.sh "$COMMITS_JSON" "$GITHUB_ACTOR" "$GITHUB_REF_NAME" "$GITHUB_COMPARE_URL")" >> $GITHUB_OUTPUT
+              echo "message=$(.github/workflows/notify-irc.sh "$COMMITS_JSON" "$GITHUB_ACTOR" "$GITHUB_REF_NAME" "$GITHUB_COMPARE_URL")" | tee -a /tmp/message
+    printf "%s\n" "message=$(cat /tmp/message)" >> $GITHUB_OUTPUT
 
       - name: Notify IRC
         uses: rectalogic/notify-irc@v1
