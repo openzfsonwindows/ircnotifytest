@@ -23,3 +23,5 @@ fourteen
 fifteen
 sixteen
 seventeen
+eightteen
+nineteen
