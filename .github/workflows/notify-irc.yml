@@ -23,7 +23,8 @@ jobs:
       - name: Encode Message as JSON
         id: encode-message
         run: |
-          MULTILINE_MESSAGE="Testing line one\nTest line two"
+          MULTILINE_MESSAGE="Testing line one
+Test line two"
           ENCODED_MESSAGE=$(echo "$MULTILINE_MESSAGE" | jq -R .)
           echo "message=$ENCODED_MESSAGE" >> $GITHUB_OUTPUT
 
