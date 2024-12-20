@@ -20,11 +20,17 @@ jobs:
         run: |
               .github/workflows/notify-irc.sh "$COMMITS_JSON" "$GITHUB_ACTOR" "$GITHUB_REF_NAME" "$GITHUB_COMPARE_URL"
 
+      - name: Decode Message for IRC Notify
+        id: decode-message
+        run: |
+              ENCODED_MESSAGE="${{ steps.notify-irc.outputs.message }}"
+              DECODED_MESSAGE=$(echo "$ENCODED_MESSAGE" | base64 --decode)
+              echo "decoded_message=$DECODED_MESSAGE" >> $GITHUB_ENV
+
       - name: Notify IRC
         uses: rectalogic/notify-irc@v1
         with:
           channel: "#OpenZFS-Windows"
           server: "irc.libera.chat"
           nickname: "zfs-consus"
-          message: "${{ steps.notify.outputs.message }}"
-
+          message: "${{ env.decoded_message }}"
