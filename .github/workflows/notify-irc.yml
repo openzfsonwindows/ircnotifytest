@@ -23,7 +23,7 @@ jobs:
       - name: Decode Message for IRC Notify
         id: decode-message
         run: |
-              ENCODED_MESSAGE="${{ steps.notify-irc.outputs.message }}"
+              ENCODED_MESSAGE="VGVzdCBsaW5lIG9uZQpUZXN0IGxpbmUgdHdvCg=="
               DECODED_MESSAGE=$(echo "$ENCODED_MESSAGE" | base64 --decode)
               echo "decoded_message=$DECODED_MESSAGE" >> $GITHUB_ENV
 
