@@ -5,7 +5,8 @@ ACTOR="${2:-unknown}"
 BRANCH="${3:-unknown}"
 COMPARE_URL="${4:-unknown}"
 
-commit_count=$(echo "$COMMITS_JSON" | jq 'length' || echo 0)
+commit_count=$(echo "$COMMITS_JSON" | jq 'length')
+commit_count=${commit_count:-0}
 
 if [ "$commit_count" -eq 0 ]; then
     echo "message=[openzfs] $ACTOR pushed no commits to $BRANCH at $COMPARE_URL"
