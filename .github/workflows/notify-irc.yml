@@ -15,10 +15,16 @@ jobs:
       - name: Set execute permissions
         run: chmod +x .github/workflows/notify-irc.sh
 
-      - name: Run Notify IRC Script
+      - name: Generate notification message
+        id: notify
         run: |
-          .github/workflows/notify-irc.sh "$COMMITS_JSON" "$ACTOR" "$BRANCH" "$COMPARE_URL" | notify-irc \
-            --channel "#OpenZFS-Windows" \
-            --server "irc.libera.chat" \
-            --nickname zfs-consus
+          .github/workflows/notify-irc.sh "$COMMITS_JSON" "$GITHUB_ACTOR" "$GITHUB_REF_NAME" "$GITHUB_COMPARE_URL" > notification.txt
+
+      - name: Notify IRC
+        uses: rectalogic/notify-irc@v1
+        with:
+          channel: "#OpenZFS-Windows"
+          server: "irc.libera.chat"
+          nickname: "zfs-consus"
+          message: $(cat notification.txt)
 
