@@ -4,9 +4,13 @@ name: Notify IRC on Push
 on:
   push:
   issues:
-
+    types:
+      - opened
+      - edited
+      - closed
+      
 jobs:
-  notify:
+  notify-irc:
     runs-on: ubuntu-latest
 
     steps:
