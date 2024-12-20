@@ -11,22 +11,27 @@ COMPARE_URL="${GITHUB_COMPARE_URL:-unknown}"
 commit_count=$(echo "$COMMITS_JSON" | jq 'length')
 commit_count=${commit_count:-0}
 
-if [ "$commit_count" -eq 0 ]; then
-    echo "[openzfs] $ACTOR pushed no commits to $BRANCH at $COMPARE_URL"
-else
-    echo "[openzfs] $ACTOR pushed $commit_count commits to $BRANCH at $COMPARE_URL"
-fi
 
-# Limit to the first 8 commits if there are any
+
+# Create an initial message
+message="[openzfs] $ACTOR pushed $commit_count commit(s) to $BRANCH at $COMPARE_URL"
+
+# Add commits to the message
 if [ "$commit_count" -gt 0 ]; then
-  # Extract and print up to 8 commits
+  # Extract and format up to 8 commits
   commits=$(echo "$COMMITS_JSON" | jq -r '.[:8] | .[] | "\(.id[:7]) - \(.message | split("\n")[0])"')
 
-  # Print each commit's short ID and title
+  # Append each commit to the message
   while IFS= read -r commit; do
-    echo "<zfs-consus> $commit"
+    message="$message\n<zfs-consus> $commit"
   done <<< "$commits"
 fi
+
+# Escape newlines and format the message to a single line
+formatted_message=$(echo "$message" | sed ':a;N;$!ba;s/\n/\\n/g')
+
+# Print the formatted message
+echo "message=$formatted_message" >> $GITHUB_OUTPUT
 
 
 
