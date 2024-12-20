@@ -1,8 +1,5 @@
 #!/bin/bash
 
-echo "Dumping ENV"
-env
-
 EVENT_PATH="${GITHUB_EVENT_PATH}"
 
 # Read the commits data from the GITHUB_EVENT_PATH JSON file
