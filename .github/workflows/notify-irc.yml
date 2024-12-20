@@ -18,7 +18,7 @@ jobs:
       - name: Generate notification message
         id: notify
         run: |
-              $(.github/workflows/notify-irc.sh "$COMMITS_JSON" "$GITHUB_ACTOR" "$GITHUB_REF_NAME" "$GITHUB_COMPARE_URL")"
+              .github/workflows/notify-irc.sh "$COMMITS_JSON" "$GITHUB_ACTOR" "$GITHUB_REF_NAME" "$GITHUB_COMPARE_URL"
 
       - name: Notify IRC
         uses: rectalogic/notify-irc@v1
