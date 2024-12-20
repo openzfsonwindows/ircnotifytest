@@ -15,13 +15,6 @@ jobs:
       - name: Set execute permissions
         run: chmod +x .github/workflows/notify-irc.sh
 
-      - name: Generate notification message
-        id: notify
-        run: |
-          ENCODED_MESSAGE="$(.github/workflows/notify-irc.sh | jq -R .)"
-          echo "Encoded is $ENCODED_MESSAGE"
-          echo "message=$ENCODED_MESSAGE" >> $GITHUB_OUTPUT
-
       - name: Notify IRC
         uses: rectalogic/notify-irc@v1
         with:
