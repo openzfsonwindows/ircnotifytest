@@ -11,7 +11,10 @@ on:
   issue_comment:
   pull_request:
   discussion_comment:
-    types: [created, edited, deleted]
+    types:
+      - opened
+      - edited
+      - closed
   create:
   delete:
 
