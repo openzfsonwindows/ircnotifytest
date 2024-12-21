@@ -1,5 +1,5 @@
 
-name: Notify IRC on Push
+name: Notify IRC
 
 on:
   push:
@@ -11,6 +11,7 @@ on:
   issue_comment:
   pull_request:
   discussion_comment:
+    types: [created, edited, deleted]
   create:
   delete:
 
