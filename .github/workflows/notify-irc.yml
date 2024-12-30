@@ -26,7 +26,7 @@ jobs:
 
     steps:
       - name: Notify IRC
-        uses: openzfsonwindows/notify-irc@v1
+        uses: openzfsonwindows/notify-irc@main
         with:
           channel: "#OpenZFS-Windows"
           server: "irc.libera.chat"
